@@ -1,0 +1,26 @@
+.home-page {
+  overflow: hidden;
+  margin-top: -5%;
+  display: flex;
+  background-image: url("/corona.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 102.9vh;
+}
+
+.title-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 7vw;
+  text-align: center;
+  color: white;
+  margin-top: 15%;
+}
+
+.title-subtext {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.8vw;
+  text-align: center;
+  color: white;
+  margin-top: -5%;
+}
