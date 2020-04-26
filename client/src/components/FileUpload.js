@@ -1,14 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import Message from './Message';
-import Progress from './Progress';
 import axios from 'axios';
 
-const FileUpload = ( ) => {
+const FileUpload = ({ setStatus }) => {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
-  const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const onChange = e => {
     setFile(e.target.files[0]);
@@ -21,22 +19,16 @@ const FileUpload = ( ) => {
     formData.append('file', file);
 
     try {
-      const res = await axios.post('/api/detection', formData, {
+      const res = await axios.post('http://localhost:5000/api/detection', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => {
-          setUploadPercentage(
-            parseInt(
-              Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            )
-          );
-
-          // Clear percentage
-          setTimeout(() => setUploadPercentage(0), 10000);
         }
       })
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log("worked")
+          setStatus("RESPONSE")
+          console.log(res)
+        })
 
       const { fileName, filePath } = res.data;
 
@@ -44,20 +36,18 @@ const FileUpload = ( ) => {
 
       setMessage('File Uploaded');
     } catch (err) {
-      /*
       if (err.response.status === 500) {
         setMessage('There was a problem with the server');
       } else {
         setMessage(err.response.data.msg);
       }
-      */
     }
   };
 
   return (
     <Fragment>
       {message ? <Message msg={message} /> : null}
-      <form onSubmit={onSubmit}>
+      <form onSubmit={(e) => onSubmit(e)}>
         <div className='custom-file mb-4'>
           <input
             type='file'
@@ -69,8 +59,6 @@ const FileUpload = ( ) => {
             {filename}
           </label>
         </div>
-
-        <Progress percentage={uploadPercentage} />
 
         <input
           type='submit'
@@ -86,8 +74,9 @@ const FileUpload = ( ) => {
           </div>
         </div>
       ) : null}
+      <button onClick={() => setStatus("GOOD")}>Get status</button>
     </Fragment>
   );
-};
+}
 
 export default FileUpload;

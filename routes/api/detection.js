@@ -18,10 +18,10 @@ const predict = async (imgName, res) => {
   const model = await tf.loadLayersModel("https://coronabay.org/model.json")
   const imageBuffer = fs.readFileSync(path.resolve(__dirname, "../../client/public/uploads/processed-" + imgName));
   const tfimage = tf.node.decodePng(imageBuffer, 1).as3D(1, 150, 150);
-  const prediction = await model.predict(tfimage).dataSync()[0];
+  const prediction = await model.predict(tfimage).dataSync()[0].toString();
   console.log(prediction)
-  
-  res.send(`${prediction}`);
+  console.log(typeof prediction)
+  res.send(prediction);
 }
 
 

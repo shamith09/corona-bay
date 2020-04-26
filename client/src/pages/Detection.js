@@ -4,14 +4,14 @@ import FileUpload from "../components/FileUpload";
 
 const Detection = () => {
 
-    const [detection, setDetection] = useState();
+    const [status, setStatus] = useState("");
 
     return (
         <div>
             <h1>Detection page</h1>
             <div className="container">
-                <FileUpload setStatus={setDetection} />
-                <h1></h1>
+                <FileUpload setStatus={setStatus} />
+                <h1>{status}</h1>
             </div>
         </div>
     )
