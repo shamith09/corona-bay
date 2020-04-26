@@ -133,6 +133,16 @@ const Navbar = (props) => {
               >
                 <Button color="inherit">News</Button>
               </Link>
+              <Link
+                to="/detection"
+                style={{
+                  color: "inherit",
+                  textDecoration: "inherit",
+                  marginLeft: "1%",
+                }}
+              >
+                <Button color="inherit">Detection</Button>
+              </Link>
             </Typography>
             <Link
               to="/profile"
