@@ -7,6 +7,7 @@ const FileUpload = ({ setStatus }) => {
   const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
+  const [result, setResult] = useState("");
 
   const onChange = e => {
     setFile(e.target.files[0]);
@@ -19,15 +20,21 @@ const FileUpload = ({ setStatus }) => {
     formData.append('file', file);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/detection', formData, {
+      const res = await axios.post('/api/detection', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
         .then((res) => {
-          console.log("worked")
-          setStatus("RESPONSE")
-          console.log(res)
+          axios.post('/api/get-detection-results', { id: res.data}, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(res => {
+              setResult(res.data);
+              //console.log(res.data)
+            })
         })
 
       const { fileName, filePath } = res.data;
@@ -36,13 +43,16 @@ const FileUpload = ({ setStatus }) => {
 
       setMessage('File Uploaded');
     } catch (err) {
-      if (err.response.status === 500) {
-        setMessage('There was a problem with the server');
-      } else {
-        setMessage(err.response.data.msg);
-      }
+     console.log(err)
     }
   };
+
+  const getResult = () => {
+    if(result === 1) return "The CT scan was positive";
+    else if(result === 0) return "The CT scan was negative";
+    else if(result === "") return ""
+    else return "An error has occurced" 
+  }
 
   return (
     <Fragment>
@@ -74,7 +84,7 @@ const FileUpload = ({ setStatus }) => {
           </div>
         </div>
       ) : null}
-      <button onClick={() => setStatus("GOOD")}>Get status</button>
+      <h1> {getResult()} </h1>
     </Fragment>
   );
 }
