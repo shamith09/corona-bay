@@ -39,24 +39,25 @@ const Symptoms = () => {
         const responseValues = Object.values(state);
         let count = parseInt(age) / 30;
         console.log(count)
-        responseValues.forEach(value => {
-            if (value) count++;
+        responseValues.forEach((value, i) => {
+            if (i >= 0 && i <= 7 && value) {
+                count += 1000;
+            }
+            else if (value) count++;
         })
+        if (count > 1000) setResult("Call 911 immediately.");
         if (count > 8) setResult("Urgent medical attention may be needed. Go to the ER.")
         else if (count < 8 && count > 2) setResult("Stay home and stay safe. If your ilness worsens, call your doctor.");
-        else if(count < 2) setResult("You're probably ok.")
+        else if (count < 2) setResult("You're probably ok.")
     }
 
     return (
-        <Container>
+        <>
             <h1 style={{ textAlign: "center", fontSize: "4em", margin: "1%", color: "#C7F9CC" }}>Symptoms</h1>
             <p style={{ textAlign: "center", fontSize: "2.3em", color: "#C0C0C0" }}>Please check all of the boxes which apply to you.</p>
             <Grid
                 container
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justify="center"
+                spacing={3}
             >
                 <Grid item xs={3}>
                     <FormControlLabel
@@ -125,6 +126,9 @@ const Symptoms = () => {
                         label="Shortness of breath or difficulty breathing"
                         style={{ color: "#FFFFFF" }}
                     />
+                </Grid>
+
+                <Grid item xs={3}>
                     <FormControlLabel
                         control={<Checkbox checked={state.twelve} onChange={handleChange} name="twelve" />}
                         center
@@ -193,19 +197,19 @@ const Symptoms = () => {
                         style={{ color: "#FFFFFF" }}
                     />
                 </Grid>
-                <div style={{margin: "1%"}} />
-                <p style={{color: "white", fontSize: "1.5em"}}>Enter your age:</p>
+                <div style={{ margin: "1%" }} />
+                <p style={{ color: "white", fontSize: "1.5em" }}>Enter your age:</p>
                 <input type="text"
                     onChange={(e) => {
                         e.preventDefault();
                         setAge(e.target.value);
                     }} value={age} />
-                    <div style={{margin: "2%"}} />
+                <div style={{ margin: "2%" }} />
                 <button onClick={() => getResult()} style={{ textAlign: "center", margin: "1em" }}>Get Feedback</button>
                 <button onClick={() => window.location.reload()} style={{ textAlign: "center", margin: "1em", marginBottom: "1em" }}>Reset</button>
                 <h1 style={{ marginBottom: "2em", marginTop: "0.5em", color: "#DCE2C8" }}>{result}</h1>
             </Grid>
-        </Container>
+            </>
     )
 }
 
