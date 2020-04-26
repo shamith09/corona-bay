@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import MapView from "../components/MapView";
-import DataTable from "../components/DataTable";
 import { Grid, Container } from "@material-ui/core";
 import ReactTooltip from "react-tooltip";
 
@@ -25,6 +24,9 @@ const Statistics = () => {
         <div style={{ flexGrow: 1 }}>
           <Grid container>
             <Grid item xs={3}>
+            <h3 style={{color: "white", margin: "3%", lineHeight: "150%"}}>
+              This is a world map colored based on density of confirmed corona virus cases by population. Hover your mouse over any country to learn about how many confirmed cases it has and its population. The darker the color, the higher the density of confirmed cases
+            </h3>
             </Grid>
             <Grid item xs={8}>
               <MapView setCountry={setCountry} setTooltipContent={setContent} data={data} />
