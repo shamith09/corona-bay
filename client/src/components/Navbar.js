@@ -64,6 +64,16 @@ const unauthenticatedNavbar = (classes) => {
             >
               <Button color="inherit">News</Button>
             </Link>
+            <Link
+                to="/symptoms"
+                style={{
+                  color: "inherit",
+                  textDecoration: "inherit",
+                  marginLeft: "1%",
+                }}
+              >
+                <Button color="inherit">Symptoms</Button>
+              </Link>
           </Typography>
           <Link
             to="/register"
@@ -132,6 +142,16 @@ const Navbar = (props) => {
                 }}
               >
                 <Button color="inherit">News</Button>
+              </Link>
+              <Link
+                to="/symptoms"
+                style={{
+                  color: "inherit",
+                  textDecoration: "inherit",
+                  marginLeft: "1%",
+                }}
+              >
+                <Button color="inherit">Symptoms</Button>
               </Link>
               <Link
                 to="/detection"

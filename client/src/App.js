@@ -19,6 +19,7 @@ import Statistics from "./pages/Statistics";
 import About from "./pages/About";
 import News from "./pages/News";
 import Detection from "./pages/Detection";
+import Symptoms from "./pages/Symptoms";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -55,8 +56,8 @@ const App = () => {
           <Route exact path="/about" component={About} />
           <Route path="/statistics" component={Statistics} />
           <Route path="/news" component={News} />
-          <Route exact path="/detection" component={Detection} />
-
+          <Route path="/detection" component={Detection} />
+          <Route path="/symptoms" component={Symptoms} />
 
           <PrivateRoute exact path="/profile" component={Profile} />
           <Route component={NoRouteMatch} />
