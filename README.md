@@ -4,7 +4,7 @@
 
 Clone the repository
 ```
-git clone https://github.com/taylorallen0913/corona-hub
+git clone https://github.com/shamith09/corona-hub
 ```
 
 Navigate to directory
