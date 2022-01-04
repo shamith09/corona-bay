@@ -4,12 +4,12 @@
 
 Clone the repository
 ```
-git clone https://github.com/shamith09/corona-hub
+git clone https://github.com/shamith09/corona-bay
 ```
 
 Navigate to directory
 ```
-cd corona-hub
+cd corona-bay
 ```
 
 Create a .env file in the root directory
