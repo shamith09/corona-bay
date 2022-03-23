@@ -1,4 +1,6 @@
-# CoronaBay
+# Corona Bay
+
+Diagnosing COVID-19 based on CT lung scan images.
 
 ## Development Setup
 
